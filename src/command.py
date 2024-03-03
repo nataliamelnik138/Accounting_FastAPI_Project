@@ -1,10 +1,9 @@
 import asyncio
 import contextlib
 
-
 from fastapi_users.exceptions import UserAlreadyExists
 
-from src.database import get_user_db, get_async_session
+from src.database import get_async_session, get_user_db
 from src.manager import get_user_manager
 from src.schemas import UserCreate
 

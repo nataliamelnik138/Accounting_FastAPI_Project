@@ -1,7 +1,8 @@
 from typing import Optional
 
 from fastapi import Depends, Request
-from fastapi_users import BaseUserManager, IntegerIDMixin, schemas, models, exceptions
+from fastapi_users import (BaseUserManager, IntegerIDMixin, exceptions, models,
+                           schemas)
 
 from src.config import SECRET_KEY
 from src.database import User, get_user_db
@@ -44,7 +45,8 @@ class UserManager(IntegerIDMixin, BaseUserManager[User, int]):
         )
         password = user_dict.pop("password")
         user_dict["hashed_password"] = self.password_helper.hash(password)
-        # При создании пользователя role_id всегда будет равно 1 (пользователь) или 2 (бухгалтер)
+        # При создании пользователя role_id всегда
+        # будет равно 1 (пользователь) или 2 (бухгалтер)
         if user_dict["is_superuser"]:
             user_dict["role_id"] = 2
         else:

@@ -1,12 +1,16 @@
 from sqlalchemy import insert, select
 
 from src.models import Role
-from tests.conftest import client, async_session_maker
+from tests.conftest import async_session_maker, client
 
 
 async def test_add_role():
     async with async_session_maker() as session:
-        stat = insert(Role.__tablename__).values(id=1, name="admin", permissions=None)
+        stat = insert(Role.__tablename__).values(
+            id=1,
+            name="admin",
+            permissions=None
+        )
         await session.execute(stat)
         await session.commit()
 

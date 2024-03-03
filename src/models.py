@@ -1,6 +1,6 @@
-from sqlalchemy.orm import DeclarativeMeta, declarative_base
 from fastapi_users.db import SQLAlchemyBaseUserTable
-from sqlalchemy import Integer, String, JSON, Boolean, Column, ForeignKey
+from sqlalchemy import JSON, Boolean, Column, ForeignKey, Integer, String
+from sqlalchemy.orm import DeclarativeMeta, declarative_base
 
 Base: DeclarativeMeta = declarative_base()
 
@@ -18,7 +18,10 @@ class Role(Base):
 
     id = Column(Integer, primary_key=True, doc="Уникальный идентификатор роли")
     name = Column(String, nullable=False, doc="Название роли")
-    permissions = Column(JSON, doc="JSON-объект, содержащий ролевые разрешения")
+    permissions = Column(
+        JSON,
+        doc="JSON-объект, содержащий ролевые разрешения"
+    )
 
 
 class User(SQLAlchemyBaseUserTable[int], Base):
@@ -40,12 +43,17 @@ class User(SQLAlchemyBaseUserTable[int], Base):
 
     __tablename__ = "user"
 
-    id = Column(Integer, primary_key=True, index=True, doc="Уникальный идентификатор пользователя")
+    id = Column(Integer, primary_key=True, index=True,
+                doc="Уникальный идентификатор пользователя")
     email = Column(String(length=320), unique=True, index=True, nullable=False)
     username = Column(String, unique=True, index=True)
     full_name = Column(String, nullable=True, doc="ФИО пользователя")
     phone = Column(String, doc="Номер телефона пользователя", nullable=True)
-    hashed_password = Column(String, nullable=False, doc="Хэш пароля пользователя")
+    hashed_password = Column(
+        String,
+        nullable=False,
+        doc="Хэш пароля пользователя"
+    )
     photo = Column(String, doc="Фото", nullable=True)  # URL to the photo
     position = Column(String, doc="Должность", nullable=True)
     salary = Column(Integer, doc="Заработная плата", nullable=True)

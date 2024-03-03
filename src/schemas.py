@@ -1,6 +1,7 @@
 from typing import Optional
-from pydantic import BaseModel
+
 from fastapi_users import schemas
+from pydantic import BaseModel
 
 
 class UserRead(schemas.BaseUser[int]):

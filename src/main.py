@@ -1,12 +1,13 @@
 from typing import Annotated
-from fastapi import FastAPI, Depends
+
+from fastapi import Depends, FastAPI
 from fastapi_users import FastAPIUsers
 
 from src.auth_config import auth_backend
 from src.dao import UserDAO
 from src.database import User
 from src.manager import get_user_manager
-from src.schemas import UserRead, UserCreate, UserUpdate, UserS
+from src.schemas import UserCreate, UserRead, UserS, UserUpdate
 
 app = FastAPI(
     title="Accounting"
